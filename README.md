@@ -49,6 +49,39 @@
 
 ## [민웅](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EB%AF%BC%EC%9B%85.py)
 ```py
+# 1205_등수구하기_check ranking
+import sys
+input = sys.stdin.readline
+
+N, record, P = map(int, input().split())
+
+if N > 0:
+    score = sorted(list(map(int, input().split())), reverse=True)
+else:
+    score = []
+
+# 정답 등수 출력을 위한 ans, 배열안에 이미 들어있는 기록수를 체크하기 위한 cnt
+ans = 1
+# 3 1 3
+# 1 1 1 이런 케이스 처리하기 위해서 cnt 필요함
+cnt = 1
+for i in range(len(score)):
+    if ans > P or cnt > P:
+        ans = -1
+        break
+    elif ans == P or cnt == P:
+        if score[i] >= record:
+            ans = -1
+            break
+    if score[i] > record:
+        ans += 1
+        cnt += 1
+    elif score[i] == record:
+        cnt += 1
+    else:
+        break
+
+print(ans)
 ```
 
 ## [서희](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EC%84%9C%ED%9D%AC.py)
@@ -80,6 +113,23 @@
 
 ## [민웅](./N%EB%B2%88%EC%A7%B8%20%ED%81%B0%20%EC%88%98/%EB%AF%BC%EC%9B%85.py)
 ```py
+# 2075_N번째 큰 수_Nth number
+# 한 번에 맞았지만, 비효율적인것 같음.
+import sys
+import heapq
+input = sys.stdin.readline
+
+N = int(input())
+
+numbers = sorted(list(map(int, input().split())), reverse=True)
+for _ in range(N-1):
+    lst = list(map(int, input().split()))
+    for i in range(N):
+        heapq.heappush(numbers, lst[i])
+        heapq.heappop(numbers)
+
+print(numbers[0])
+
 ```
 
 ## [서희](./N%EB%B2%88%EC%A7%B8%20%ED%81%B0%20%EC%88%98/%EC%84%9C%ED%9D%AC.py)
