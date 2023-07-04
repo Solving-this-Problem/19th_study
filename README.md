@@ -45,6 +45,28 @@
 
 ## [동우](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EB%8F%99%EC%9A%B0.py)
 ```py
+import sys
+input = sys.stdin.readline
+
+N, score, P = map(int, input().strip().split())
+
+if N:
+    scores = list(map(int, input().strip().split())) + [0]      # 랭킹 리스트보다 넘치는지 확인하기 위해서 0 추가!
+
+    rank = 1
+    for i in range(len(scores)):
+        if i == P:                              # 랭킹 리스트에 올라갈 수 없으면 -1 출력
+            rank = -1
+        else:
+            if scores[i] > score:               # 랭킹 매기기
+                rank += 1
+            elif scores[i] == score:
+                pass
+            else:                               # 작은 숫자 만나면 그만 돌아
+                break
+    print(rank)
+else:
+    print(1)
 ```
 
 ## [민웅](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EB%AF%BC%EC%9B%85.py)
