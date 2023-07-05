@@ -19,6 +19,64 @@
 
 ## [민웅](./%ED%83%9D%EB%B0%B0%20%EB%B0%B0%EB%8B%AC%EA%B3%BC%20%EC%88%98%EA%B1%B0%ED%95%98%EA%B8%B0/%EB%AF%BC%EC%9B%85.py)
 ```py
+def solution(cap, n, deliveries, pickups):
+    ans = 0
+    d_cnt, p_cnt = 0, 0
+    for i in range(n-1, -1, -1):
+        if deliveries[i] or pickups[i]:
+            d_cnt += deliveries[i]
+            p_cnt += pickups[i]
+            while d_cnt > 0 or p_cnt > 0:
+                d_cnt -= cap
+                p_cnt -= cap
+                ans += 2*(i+1)
+        else:
+            continue
+    return ans
+# 테케 맞고 정답은 몇개 틀린코드
+#def solution(cap, n, deliveries, pickups):
+#     ans = 0
+#     for i in range(n-1, -1, -1):
+#         if deliveries[i] != 0:
+#             idx = i
+#             cap_size = cap
+#             cap_size2 = cap
+#             while idx != -1:
+#                 if cap_size >= deliveries[idx]:
+#                     cap_size -= deliveries[idx]
+#                     deliveries[idx] = 0
+#                 else:
+#                     deliveries[idx] -= cap_size
+# 
+#                 if cap_size2 >= pickups[idx]:
+#                     cap_size2 -= pickups[idx]
+#                     pickups[idx] = 0
+#                 else:
+#                     pickups[idx] -= cap_size2
+#                 idx -= 1
+#             ans += 2*(i+1)
+# 
+#         elif pickups[i] != 0:
+#             idx = i
+#             cap_size = cap
+#             cap_size2 = cap
+#             while idx != -1:
+#                 if cap_size >= deliveries[idx]:
+#                     cap_size -= deliveries[idx]
+#                     deliveries[idx] = 0
+#                 else:
+#                     deliveries[idx] -= cap_size
+# 
+#                 if cap_size2 >= pickups[idx]:
+#                     cap_size2 -= pickups[idx]
+#                     pickups[idx] = 0
+#                 else:
+#                     pickups[idx] -= cap_size2
+#                 idx -= 1
+#             ans += 2*(i+1)
+# 
+#     return ans
+
 ```
 
 ## [서희](./%ED%83%9D%EB%B0%B0%20%EB%B0%B0%EB%8B%AC%EA%B3%BC%20%EC%88%98%EA%B1%B0%ED%95%98%EA%B8%B0/%EC%84%9C%ED%9D%AC.py)
