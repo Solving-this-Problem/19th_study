@@ -256,6 +256,25 @@ print(numbers[0])
 
 ## [동우](./List%20of%20Unique%20Numbers/%EB%8F%99%EC%9A%B0.py)
 ```py
+# 2% 에서 시간초과 뜸 ㅠㅠ 
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+arr = list(map(int, input().strip().split()))
+
+s, cnt = 0, 0
+
+while s != N:
+    tmp = [0] * N
+    for i in range(s, N):
+        if arr[i] in tmp:
+            break
+        tmp[i] = arr[i]
+        cnt += 1
+    s += 1
+
+print(cnt)
 ```
 
 ## [민웅](./List%20of%20Unique%20Numbers/%EB%AF%BC%EC%9B%85.py)
