@@ -103,6 +103,28 @@ def solution(cap, n, deliveries, pickups):
 
 ## [동우](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EB%8F%99%EC%9A%B0.py)
 ```py
+import sys
+input = sys.stdin.readline
+
+N, score, P = map(int, input().strip().split())
+
+if N:
+    scores = list(map(int, input().strip().split())) + [0]      # 랭킹 리스트보다 넘치는지 확인하기 위해서 0 추가!
+
+    rank = 1
+    for i in range(len(scores)):
+        if i == P:                              # 랭킹 리스트에 올라갈 수 없으면 -1 출력
+            rank = -1
+        else:
+            if scores[i] > score:               # 랭킹 매기기
+                rank += 1
+            elif scores[i] == score:
+                pass
+            else:                               # 작은 숫자 만나면 그만 돌아
+                break
+    print(rank)
+else:
+    print(1)
 ```
 
 ## [민웅](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EB%AF%BC%EC%9B%85.py)
@@ -167,6 +189,25 @@ print(ans)
 
 ## [동우](./N%EB%B2%88%EC%A7%B8%20%ED%81%B0%20%EC%88%98/%EB%8F%99%EC%9A%B0.py)
 ```py
+import sys, heapq
+input = sys.stdin.readline
+
+N = int(input().strip())
+
+heap = []                                   
+for _ in range(N):
+    arr = list(map(int, input().strip().split()))
+
+    if not heap:                            # heap이 비어있다면 채워준다. 처음에만 해당
+        for i in arr:
+            heapq.heappush(heap, i)         # min_heap 구조로 heap 채워준다
+    else:
+        for i in arr:
+            if i > heap[0]:                 # heap의 최소값(n번째로 큰 수)보다 새로운 값이 더 크면 
+                heapq.heappush(heap, i)     # push해주고
+                heapq.heappop(heap)         # 최솟값은 pop해준다
+
+print(heap[0])
 ```
 
 ## [민웅](./N%EB%B2%88%EC%A7%B8%20%ED%81%B0%20%EC%88%98/%EB%AF%BC%EC%9B%85.py)
