@@ -170,6 +170,38 @@ print(ans)
 
 ## [성구](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%EC%84%B1%EA%B5%AC.py)
 ```py
+# 1205 등수구하기
+import sys
+input = sys.stdin.readline
+'''
+0 <= N =< P
+10 <= P <= 50
+0 <= 점수 <= 2,000,000,000
+현재 랭킹 리스트 점수가 비오름차순(내림차순)으로 주어진다.
+'''       
+
+N, newScore, P = map(int, input().strip().split())
+if not P:       # 랭킹 갯수 0개
+    print(-1)
+elif not N:     # 리스트 갯수 0개
+    print(1)
+else:   
+    RankList = list(map(int, input().strip().split()))
+    if RankList[N-1] > newScore:    # 최솟값이 새로운 값보다 클때
+        if N == P:                  # 리스트가 다 차있을 때는 들어갈 수 없음
+            print(-1)
+        else:
+            print(N+1)
+    
+    elif RankList[N-1] == newScore and N==P:    # 리스트가 다 차있는데 최솟값과 새로운값이 같아도 들어갈 수 없음
+        print(-1)
+    else:   # 그 외엔 내가 가질 수 있는 최대 등수로 들어가기
+        ans = -1
+        for i in range(N):
+            if RankList[i] <= newScore:
+                ans = i+1
+                break
+        print(ans)
 ```
 
 ## [혜진](./%EB%93%B1%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0/%ED%98%9C%EC%A7%84.py)
@@ -237,6 +269,56 @@ print(numbers[0])
 
 ## [성구](./N%EB%B2%88%EC%A7%B8%20%ED%81%B0%20%EC%88%98/%EC%84%B1%EA%B5%AC.py)
 ```py
+# 2075 N번째 큰 수
+import sys
+import heapq
+input = sys.stdin.readline
+
+N = int(input())
+que = []
+for _ in range(N):
+    for e in list(map(int, input().split())):
+        heapq.heappush(que, e)
+        if len(que) > N:
+            heapq.heappop(que)
+print(heapq.heappop(que))
+''' 실패작
+heapq 이용
+# import sys
+# import heapq
+# input = sys.stdin.readline
+
+# N = int(input())
+# arr = [list(map(int, input().strip().split())) for _ in range(N)]
+# que = []
+# maxIndex = [N-1] * N
+# for idx in range(N):
+#     heapq.heappush(que,(-arr[N-1][idx], idx))
+# for _ in range(N):
+    
+#     val, index = heapq.heappop(que)
+#     maxIndex[index] -= 1
+#     if maxIndex[index] != -1:
+#         heapq.heappush(que, (-arr[maxIndex[index]][index], index))
+# print(-val)
+
+리스트 이용
+# import sys
+# input = sys.stdin.readline
+
+# N = int(input())
+# arr = [list(map(int, input().strip().split())) for _ in range(N)]
+# maxIndex = [N-1] * N
+# for _ in range(N):
+#     maxI = 0
+#     for idx in range(N):
+#         if maxIndex[idx] >= 0 and arr[maxIndex[idx]][idx] > arr[maxIndex[maxI]][maxI]:
+#             maxI = idx
+#     ans = arr[maxIndex[maxI]][maxI]
+#     maxIndex[maxI] -= 1
+    
+# print(ans)
+'''
 ```
 
 ## [혜진](./N%EB%B2%88%EC%A7%B8%20%ED%81%B0%20%EC%88%98/%ED%98%9C%EC%A7%84.py)
